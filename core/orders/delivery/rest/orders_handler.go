@@ -3,11 +3,11 @@ package deliveryRest
 import "github.com/gin-gonic/gin"
 
 type ordersHandler struct {
-	orderDelivery
+	ordersDelivery
 	e *gin.Engine
 }
 
-type orderDelivery interface {
+type ordersDelivery interface {
 	UpdateById(c *gin.Context)
 }
 
