@@ -35,6 +35,43 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/orders/{id}": {
+            "patch": {
+                "description": "Update Order By Id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Update Order By Id",
+                "parameters": [
+                    {
+                        "description": "update message",
+                        "name": "default",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/domain.ReqOrderData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success response",
+                        "schema": {
+                            "$ref": "#/definitions/domain.OrderDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "請求的body、header驗證失敗",
+                        "schema": {
+                            "$ref": "#/definitions/domain.ResponseError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -43,6 +80,46 @@ const docTemplate = `{
             "properties": {
                 "app": {
                     "type": "string"
+                }
+            }
+        },
+        "domain.OrderDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.ReqOrderData": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.ResponseError": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "description": "自定義錯誤代碼",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "錯誤訊息",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "API路徑",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "錯誤狀態碼",
+                    "type": "integer"
                 }
             }
         }
