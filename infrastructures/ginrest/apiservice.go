@@ -5,6 +5,7 @@ import (
 	appRest "jubo-go-api/core/app/delivery/rest"
 	appUcase "jubo-go-api/core/app/usecases"
 	ordersRest "jubo-go-api/core/orders/delivery/rest"
+	patientsRest "jubo-go-api/core/patients/delivery/rest"
 	"net/http"
 	"os"
 	"os/signal"
@@ -43,6 +44,7 @@ func (api *APIService) Start(mongoClient *mongo.Client) {
 
 	appRest.NewAppHandler(r, appUsecase)
 	ordersRest.NewOrdersHandler(r)
+	patientsRest.NewPatientsHandler(r)
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
