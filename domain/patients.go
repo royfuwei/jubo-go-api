@@ -20,13 +20,14 @@ type RespFindAll struct {
 
 type PatientsRepository interface {
 	Add(data *PatientDTO) (*PatientDTO, error)
-	FindAll() ([]*PatientDTO, error)
+	FindAll() (patients []*PatientDTO, total int64, err error)
 	FindById(id string) (*PatientDTO, error)
 	UpdateById(id string, data *PatientDTO) (*PatientDTO, error)
 }
 
 type PatientUseCase interface {
+	AddOne(data *PatientDTO) (*RespPatientData, *UCaseErr)
 	FindAll() ([]*RespPatientData, *UCaseErr)
 	FindById(id string) (*RespPatientData, *UCaseErr)
-	CreateOrderById(id string, data *ReqOrderData) (*OrderDTO, *UCaseErr)
+	AddOrderById(id string, data *ReqOrderData) (*RespPatientData, *UCaseErr)
 }

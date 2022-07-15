@@ -116,6 +116,22 @@ paths:
       summary: Find All patients
       tags:
       - patients
+    post:
+      description: Create Patient
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success response
+          schema:
+            $ref: '#/definitions/domain.RespPatientData'
+        "400":
+          description: 請求的body、header驗證失敗
+          schema:
+            $ref: '#/definitions/domain.ResponseError'
+      summary: Create Patient
+      tags:
+      - patients
   /patients/{id}:
     get:
       description: Find patient by Id
@@ -133,6 +149,7 @@ paths:
       summary: Find patient by Id
       tags:
       - patients
+  /patients/{id}/order:
     post:
       description: Create Order By patientId
       produces:
@@ -141,7 +158,7 @@ paths:
         "200":
           description: success response
           schema:
-            $ref: '#/definitions/domain.OrderDTO'
+            $ref: '#/definitions/domain.RespPatientData'
         "400":
           description: 請求的body、header驗證失敗
           schema:

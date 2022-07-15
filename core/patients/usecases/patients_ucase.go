@@ -17,6 +17,10 @@ func NewPatientsUseCase(
 	}
 }
 
+func (*patientsUseCase) AddOne(data *domain.PatientDTO) (*domain.RespPatientData, *domain.UCaseErr) {
+	return nil, nil
+}
+
 func (*patientsUseCase) FindAll() ([]*domain.RespPatientData, *domain.UCaseErr) {
 	return nil, nil
 }
@@ -25,6 +29,6 @@ func (*patientsUseCase) FindById(id string) (*domain.RespPatientData, *domain.UC
 	return nil, nil
 }
 
-func (*patientsUseCase) CreateOrderById(id string, data *domain.ReqOrderData) (*domain.OrderDTO, *domain.UCaseErr) {
+func (*patientsUseCase) AddOrderById(id string, data *domain.ReqOrderData) (*domain.RespPatientData, *domain.UCaseErr) {
 	return nil, nil
 }

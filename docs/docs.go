@@ -97,6 +97,30 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Create Patient",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "patients"
+                ],
+                "summary": "Create Patient",
+                "responses": {
+                    "200": {
+                        "description": "success response",
+                        "schema": {
+                            "$ref": "#/definitions/domain.RespPatientData"
+                        }
+                    },
+                    "400": {
+                        "description": "請求的body、header驗證失敗",
+                        "schema": {
+                            "$ref": "#/definitions/domain.ResponseError"
+                        }
+                    }
+                }
             }
         },
         "/patients/{id}": {
@@ -123,7 +147,9 @@ const docTemplate = `{
                         }
                     }
                 }
-            },
+            }
+        },
+        "/patients/{id}/order": {
             "post": {
                 "description": "Create Order By patientId",
                 "produces": [
@@ -137,7 +163,7 @@ const docTemplate = `{
                     "200": {
                         "description": "success response",
                         "schema": {
-                            "$ref": "#/definitions/domain.OrderDTO"
+                            "$ref": "#/definitions/domain.RespPatientData"
                         }
                     },
                     "400": {

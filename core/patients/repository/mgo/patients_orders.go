@@ -30,8 +30,8 @@ func (m *mgoPatientsRepository) Add(data *domain.PatientDTO) (*domain.PatientDTO
 	return nil, nil
 }
 
-func (m *mgoPatientsRepository) FindAll() ([]*domain.PatientDTO, error) {
-	return nil, nil
+func (m *mgoPatientsRepository) FindAll() ([]*domain.PatientDTO, int64, error) {
+	return nil, 0, nil
 }
 
 func (m *mgoPatientsRepository) FindById(id string) (*domain.PatientDTO, error) {
