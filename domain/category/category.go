@@ -8,4 +8,6 @@ const (
 	User Category = "user"
 	// Config 功能模組
 	Config   Category = "config"
+	Patients Category = "patients"
+	Orders   Category = "orders"
 )

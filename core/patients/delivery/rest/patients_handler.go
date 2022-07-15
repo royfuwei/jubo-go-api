@@ -24,7 +24,8 @@ type patientsDelivery interface {
 
 func NewPatientsHandler(e *gin.Engine, patientsUseCase domain.PatientUseCase) {
 	handler := &patientsHandler{
-		e: e,
+		e:               e,
+		patientsUseCase: patientsUseCase,
 	}
 	root := e.Group("/patients")
 	root.GET("/", handler.FindAll)

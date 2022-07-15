@@ -5,7 +5,7 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 type PatientDTO struct {
 	Id       primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
 	Name     string             `json:"name,omitempty" bson:"name,omitempty"`
-	OrderIds []string           `json:"orderIds" bson:"orderIds,omitempty"`
+	OrderIds []string           `json:"orderIds" bson:"orderIds"`
 }
 
 type RespPatientData struct {
@@ -19,7 +19,7 @@ type RespFindAll struct {
 }
 
 type ReqAddOne struct {
-	Name     string   `json:"name,omitempty" bson:"name,omitempty"`
+	Name string `json:"name,omitempty" bson:"name,omitempty"`
 }
 
 type PatientsRepository interface {
@@ -31,7 +31,7 @@ type PatientsRepository interface {
 
 type PatientUseCase interface {
 	AddOne(data *ReqAddOne) (*RespPatientData, *UCaseErr)
-	FindAll() ([]*RespPatientData, *UCaseErr)
+	FindAll() (*RespFindAll, *UCaseErr)
 	FindById(id string) (*RespPatientData, *UCaseErr)
 	AddOrderById(id string, data *ReqOrderData) (*RespPatientData, *UCaseErr)
 }

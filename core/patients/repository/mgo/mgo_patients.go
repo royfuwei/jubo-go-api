@@ -61,7 +61,7 @@ func (m *mgoPatientsRepository) FindById(id string) (*domain.PatientDTO, error) 
 		glog.Error(err)
 		return nil, err
 	}
-	return nil, nil
+	return patient, nil
 }
 
 func (m *mgoPatientsRepository) UpdateById(id string, data *domain.PatientDTO) (*domain.PatientDTO, error) {
