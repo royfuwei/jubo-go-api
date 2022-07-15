@@ -5,6 +5,8 @@ import (
 	appRest "jubo-go-api/core/app/delivery/rest"
 	appUcase "jubo-go-api/core/app/usecases"
 	ordersRest "jubo-go-api/core/orders/delivery/rest"
+	ordersMgo "jubo-go-api/core/orders/repository/mgo"
+	ordersUcase "jubo-go-api/core/orders/usecases"
 	patientsRest "jubo-go-api/core/patients/delivery/rest"
 	"net/http"
 	"os"
@@ -39,11 +41,15 @@ func (api *APIService) Start(mongoClient *mongo.Client) {
 	// Disable log's color
 	// gin.DisableConsoleColor()
 
-	/* usecase, delivery 注入router */
-	appUsecase := appUcase.NewAppUsecase()
+	ordersRepo := ordersMgo.NewMgoOrdersRepository(mongoClient)
 
-	appRest.NewAppHandler(r, appUsecase)
-	ordersRest.NewOrdersHandler(r)
+	/* usecase, delivery 注入router */
+	appUseCase := appUcase.NewAppUsecase()
+
+	ordersUseCase := ordersUcase.NewOrdersUseCase(ordersRepo)
+
+	appRest.NewAppHandler(r, appUseCase)
+	ordersRest.NewOrdersHandler(r, ordersUseCase)
 	patientsRest.NewPatientsHandler(r)
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

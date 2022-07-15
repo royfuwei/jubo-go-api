@@ -1,19 +1,25 @@
 package deliveryRest
 
-import "github.com/gin-gonic/gin"
+import (
+	"jubo-go-api/domain"
+
+	"github.com/gin-gonic/gin"
+)
 
 type ordersHandler struct {
 	ordersDelivery
-	e *gin.Engine
+	orderUcase domain.OrdersUseCase
+	e          *gin.Engine
 }
 
 type ordersDelivery interface {
 	UpdateById(c *gin.Context)
 }
 
-func NewOrdersHandler(e *gin.Engine) {
+func NewOrdersHandler(e *gin.Engine, orderUcase domain.OrdersUseCase) {
 	handler := &ordersHandler{
-		e: e,
+		e:          e,
+		orderUcase: orderUcase,
 	}
 	root := e.Group("/orders")
 	root.PATCH("/:id", handler.UpdateById)
