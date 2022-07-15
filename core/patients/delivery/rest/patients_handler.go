@@ -1,10 +1,15 @@
 package deliveryRest
 
-import "github.com/gin-gonic/gin"
+import (
+	"jubo-go-api/domain"
+
+	"github.com/gin-gonic/gin"
+)
 
 type patientsHandler struct {
 	patientsDelivery
-	e *gin.Engine
+	patientsUseCase domain.PatientUseCase
+	e               *gin.Engine
 }
 
 type patientsDelivery interface {
@@ -13,7 +18,7 @@ type patientsDelivery interface {
 	CreateOrderById(c *gin.Context)
 }
 
-func NewPatientsHandler(e *gin.Engine) {
+func NewPatientsHandler(e *gin.Engine, patientsUseCase domain.PatientUseCase) {
 	handler := &patientsHandler{
 		e: e,
 	}

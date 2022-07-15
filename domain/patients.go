@@ -26,7 +26,7 @@ type PatientsRepository interface {
 }
 
 type PatientUseCase interface {
-	FindAll() ([]*RespFindAll, *UCaseErr)
+	FindAll() ([]*RespPatientData, *UCaseErr)
 	FindById(id string) (*RespPatientData, *UCaseErr)
 	CreateOrderById(id string, data *ReqOrderData) (*OrderDTO, *UCaseErr)
 }
