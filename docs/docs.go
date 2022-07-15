@@ -48,6 +48,13 @@ const docTemplate = `{
                 "summary": "Update Order By Id",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
                         "description": "update message",
                         "name": "default",
                         "in": "body",
