@@ -75,13 +75,13 @@ func (m *mgoOrdersRepository) UpdateById(id string, data *domain.OrderDTO) (*dom
 	return order, err
 }
 
-func (m *mgoOrdersRepository) FindByIds(ids []string) ([]*domain.OrderDTO, error) {
+func (m *mgoOrdersRepository) FindByIds(ids []string) (orders []*domain.OrderDTO, total int64, err error) {
 	if len(ids) <= 0 {
-		return []*domain.OrderDTO{}, nil
+		return []*domain.OrderDTO{}, 0, nil
 	}
 	objIds, err := mongodb.ObjIds(ids)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	filter := bson.M{
 		"_id": bson.M{
@@ -91,23 +91,23 @@ func (m *mgoOrdersRepository) FindByIds(ids []string) ([]*domain.OrderDTO, error
 	return m.find(filter)
 }
 
-func (m *mgoOrdersRepository) find(filter bson.M, opts ...*options.FindOptions) ([]*domain.OrderDTO, error) {
-	cur, _, err := m.baseRepo.Find(filter, 5*time.Second)
+func (m *mgoOrdersRepository) find(filter bson.M, opts ...*options.FindOptions) (orders []*domain.OrderDTO, total int64, err error) {
+	cur, total, err := m.baseRepo.Find(filter, 5*time.Second)
 	if err != nil {
 		glog.Error(err)
-		return nil, err
+		return nil, 0, err
 	}
 	defer cur.Close(context.TODO())
 	var results []*domain.OrderDTO
 	for cur.Next(context.TODO()) {
 		var result *domain.OrderDTO
 		if err := cur.Decode(&result); err != nil {
-			return nil, err
+			return nil, total, err
 		}
 		results = append(results, result)
 	}
 	if err := cur.Err(); err != nil {
-		return nil, err
+		return nil, total, err
 	}
-	return results, nil
+	return results, total, nil
 }

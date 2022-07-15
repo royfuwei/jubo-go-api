@@ -14,7 +14,7 @@ type ReqOrderData struct {
 type OrdersRepository interface {
 	Add(data *OrderDTO) (*OrderDTO, error)
 	FindById(id string) (*OrderDTO, error)
-	FindByIds(ids []string) ([]*OrderDTO, error)
+	FindByIds(ids []string) (orders []*OrderDTO, total int64, err error)
 	UpdateById(id string, data *OrderDTO) (*OrderDTO, error)
 }
 
