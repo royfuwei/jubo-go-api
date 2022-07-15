@@ -18,6 +18,10 @@ type RespFindAll struct {
 	Items []*RespPatientData `json:"items"`
 }
 
+type ReqAddOne struct {
+	Name     string   `json:"name,omitempty" bson:"name,omitempty"`
+}
+
 type PatientsRepository interface {
 	Add(data *PatientDTO) (*PatientDTO, error)
 	FindAll() (patients []*PatientDTO, total int64, err error)
@@ -26,7 +30,7 @@ type PatientsRepository interface {
 }
 
 type PatientUseCase interface {
-	AddOne(data *PatientDTO) (*RespPatientData, *UCaseErr)
+	AddOne(data *ReqAddOne) (*RespPatientData, *UCaseErr)
 	FindAll() ([]*RespPatientData, *UCaseErr)
 	FindById(id string) (*RespPatientData, *UCaseErr)
 	AddOrderById(id string, data *ReqOrderData) (*RespPatientData, *UCaseErr)

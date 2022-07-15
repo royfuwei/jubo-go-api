@@ -12,4 +12,6 @@ const (
 	ErrAuthorizationEmpty         ErrorCode = "header_authorization_empty"
 	ErrBearerNotValid             ErrorCode = "header_bearer_not_valid"
 	JwtVerifyError                ErrorCode = "jwt_verify_error"
+	// ValidationFailed 前端request body驗證失敗
+	ValidationFailed ErrorCode = "validation_failed"
 )

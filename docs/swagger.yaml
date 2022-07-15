@@ -12,6 +12,11 @@ definitions:
       message:
         type: string
     type: object
+  domain.ReqAddOne:
+    properties:
+      name:
+        type: string
+    type: object
   domain.ReqOrderData:
     properties:
       message:
@@ -118,10 +123,17 @@ paths:
       - patients
     post:
       description: Create Patient
+      parameters:
+      - description: Create Patient request body
+        in: body
+        name: default
+        required: true
+        schema:
+          $ref: '#/definitions/domain.ReqAddOne'
       produces:
       - application/json
       responses:
-        "200":
+        "201":
           description: success response
           schema:
             $ref: '#/definitions/domain.RespPatientData'
@@ -135,6 +147,12 @@ paths:
   /patients/{id}:
     get:
       description: Find patient by Id
+      parameters:
+      - description: Patient ID
+        in: path
+        name: id
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -152,10 +170,22 @@ paths:
   /patients/{id}/order:
     post:
       description: Create Order By patientId
+      parameters:
+      - description: Patient ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Create Patient's Order request body
+        in: body
+        name: default
+        required: true
+        schema:
+          $ref: '#/definitions/domain.ReqOrderData'
       produces:
       - application/json
       responses:
-        "200":
+        "201":
           description: success response
           schema:
             $ref: '#/definitions/domain.RespPatientData'

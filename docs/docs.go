@@ -107,8 +107,19 @@ const docTemplate = `{
                     "patients"
                 ],
                 "summary": "Create Patient",
+                "parameters": [
+                    {
+                        "description": "Create Patient request body",
+                        "name": "default",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/domain.ReqAddOne"
+                        }
+                    }
+                ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "success response",
                         "schema": {
                             "$ref": "#/definitions/domain.RespPatientData"
@@ -133,6 +144,15 @@ const docTemplate = `{
                     "patients"
                 ],
                 "summary": "Find patient by Id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Patient ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "success response",
@@ -159,8 +179,26 @@ const docTemplate = `{
                     "patients"
                 ],
                 "summary": "Create Order By patientId",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Patient ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Create Patient's Order request body",
+                        "name": "default",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/domain.ReqOrderData"
+                        }
+                    }
+                ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "success response",
                         "schema": {
                             "$ref": "#/definitions/domain.RespPatientData"
@@ -192,6 +230,14 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.ReqAddOne": {
+            "type": "object",
+            "properties": {
+                "name": {
                     "type": "string"
                 }
             }

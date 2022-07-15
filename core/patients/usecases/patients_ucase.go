@@ -17,7 +17,7 @@ func NewPatientsUseCase(
 	}
 }
 
-func (ucase *patientsUseCase) AddOne(data *domain.PatientDTO) (*domain.RespPatientData, *domain.UCaseErr) {
+func (ucase *patientsUseCase) AddOne(data *domain.ReqAddOne) (*domain.RespPatientData, *domain.UCaseErr) {
 	return nil, nil
 }
 
