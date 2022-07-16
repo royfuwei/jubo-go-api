@@ -129,7 +129,7 @@ const docTemplate = `{
                     "200": {
                         "description": "success response",
                         "schema": {
-                            "$ref": "#/definitions/domain.RespFindAll"
+                            "$ref": "#/definitions/domain.RespPatients"
                         }
                     },
                     "400": {
@@ -292,20 +292,6 @@ const docTemplate = `{
                 }
             }
         },
-        "domain.RespFindAll": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/domain.RespPatientData"
-                    }
-                },
-                "total": {
-                    "type": "integer"
-                }
-            }
-        },
         "domain.RespOrders": {
             "type": "object",
             "properties": {
@@ -340,6 +326,20 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/domain.OrderDTO"
                     }
+                }
+            }
+        },
+        "domain.RespPatients": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.RespPatientData"
+                    }
+                },
+                "total": {
+                    "type": "integer"
                 }
             }
         },

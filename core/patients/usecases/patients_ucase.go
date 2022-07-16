@@ -79,7 +79,7 @@ func (ucase *patientsUseCase) AddOne(data *domain.ReqAddOne) (*domain.RespPatien
 	return ucase.getRespPatientData(patient)
 }
 
-func (ucase *patientsUseCase) FindAll() (*domain.RespFindAll, *domain.UCaseErr) {
+func (ucase *patientsUseCase) FindAll() (*domain.RespPatients, *domain.UCaseErr) {
 	patients, total, err := ucase.patientsRepo.FindAll()
 	if err != nil {
 		return nil, tools.NewUCaseErr(category.Patients, errcode.Default, err, nil)
@@ -88,7 +88,7 @@ func (ucase *patientsUseCase) FindAll() (*domain.RespFindAll, *domain.UCaseErr) 
 	if uCaseErr != nil {
 		return nil, uCaseErr
 	}
-	return &domain.RespFindAll{
+	return &domain.RespPatients{
 		Items: respPatientDataList,
 		Total: total,
 	}, nil

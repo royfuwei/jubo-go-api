@@ -13,7 +13,7 @@ type RespPatientData struct {
 	Orders      []*OrderDTO `json:"orders,omitempty"`
 }
 
-type RespFindAll struct {
+type RespPatients struct {
 	Total int64              `json:"total"`
 	Items []*RespPatientData `json:"items"`
 }
@@ -31,7 +31,7 @@ type PatientsRepository interface {
 
 type PatientUseCase interface {
 	AddOne(data *ReqAddOne) (*RespPatientData, *UCaseErr)
-	FindAll() (*RespFindAll, *UCaseErr)
+	FindAll() (*RespPatients, *UCaseErr)
 	FindById(id string) (*RespPatientData, *UCaseErr)
 	AddOrderById(id string, data *ReqOrderData) (*RespPatientData, *UCaseErr)
 }

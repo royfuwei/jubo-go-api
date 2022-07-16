@@ -22,15 +22,6 @@ definitions:
       message:
         type: string
     type: object
-  domain.RespFindAll:
-    properties:
-      items:
-        items:
-          $ref: '#/definitions/domain.RespPatientData'
-        type: array
-      total:
-        type: integer
-    type: object
   domain.RespOrders:
     properties:
       items:
@@ -54,6 +45,15 @@ definitions:
         items:
           $ref: '#/definitions/domain.OrderDTO'
         type: array
+    type: object
+  domain.RespPatients:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/domain.RespPatientData'
+        type: array
+      total:
+        type: integer
     type: object
   domain.ResponseError:
     properties:
@@ -150,7 +150,7 @@ paths:
         "200":
           description: success response
           schema:
-            $ref: '#/definitions/domain.RespFindAll'
+            $ref: '#/definitions/domain.RespPatients'
         "400":
           description: 請求的body、header驗證失敗
           schema:

@@ -39,7 +39,7 @@ func NewPatientsHandler(e *gin.Engine, patientsUseCase domain.PatientUseCase) {
 // @Description Find All patients
 // @Tags patients
 // @Produce json
-// @Success 200 {object} domain.RespFindAll "success response"
+// @Success 200 {object} domain.RespPatients "success response"
 // @Failure 400 {object} domain.ResponseError "請求的body、header驗證失敗"
 // @Router /patients [get]
 func (h *patientsHandler) FindAll(c *gin.Context) {
