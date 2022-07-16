@@ -11,6 +11,11 @@ type ReqOrderData struct {
 	Message string `json:"message,omitempty" bson:"message,omitempty"`
 }
 
+type RespOrders struct {
+	Total int64       `json:"total"`
+	Items []*OrderDTO `json:"items"`
+}
+
 type OrdersRepository interface {
 	Add(data *OrderDTO) (*OrderDTO, error)
 	FindById(id string) (*OrderDTO, error)
@@ -20,4 +25,5 @@ type OrdersRepository interface {
 
 type OrdersUseCase interface {
 	UpdateById(id string, data *ReqOrderData) (*OrderDTO, *UCaseErr)
+	FindManyByPatientId(patientId string) (*RespOrders, *UCaseErr)
 }

@@ -36,6 +36,41 @@ const docTemplate = `{
                 }
             }
         },
+        "/orders/patients/{patientId}": {
+            "get": {
+                "description": "Find Orders By patientId",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Find Orders By patientId",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Patient ID",
+                        "name": "patientId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success response",
+                        "schema": {
+                            "$ref": "#/definitions/domain.RespOrders"
+                        }
+                    },
+                    "400": {
+                        "description": "請求的body、header驗證失敗",
+                        "schema": {
+                            "$ref": "#/definitions/domain.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/orders/{id}": {
             "patch": {
                 "description": "Update Order By Id",
@@ -264,6 +299,20 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/domain.RespPatientData"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.RespOrders": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.OrderDTO"
                     }
                 },
                 "total": {

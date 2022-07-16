@@ -31,6 +31,15 @@ definitions:
       total:
         type: integer
     type: object
+  domain.RespOrders:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/domain.OrderDTO'
+        type: array
+      total:
+        type: integer
+    type: object
   domain.RespPatientData:
     properties:
       id:
@@ -107,6 +116,29 @@ paths:
           schema:
             $ref: '#/definitions/domain.ResponseError'
       summary: Update Order By Id
+      tags:
+      - order
+  /orders/patients/{patientId}:
+    get:
+      description: Find Orders By patientId
+      parameters:
+      - description: Patient ID
+        in: path
+        name: patientId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success response
+          schema:
+            $ref: '#/definitions/domain.RespOrders'
+        "400":
+          description: 請求的body、header驗證失敗
+          schema:
+            $ref: '#/definitions/domain.ResponseError'
+      summary: Find Orders By patientId
       tags:
       - order
   /patients:

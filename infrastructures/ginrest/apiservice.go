@@ -48,7 +48,7 @@ func (api *APIService) Start(mongoClient *mongo.Client) {
 
 	/* usecase, delivery 注入router */
 	appUseCase := appUcase.NewAppUsecase()
-	ordersUseCase := ordersUcase.NewOrdersUseCase(ordersRepo)
+	ordersUseCase := ordersUcase.NewOrdersUseCase(ordersRepo, patientsRepo)
 	patientsUseCase := patientsUcase.NewPatientsUseCase(patientsRepo, ordersRepo)
 
 	appRest.NewAppHandler(r, appUseCase)
